@@ -27,8 +27,7 @@ You're now ready to start using bootstrap-table.
 ```csharp
 @(Html.BootstrapTable<Person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
     .Apply(TableOption.striped)
-    .Apply(m => m.Id, ColumnOption.align_center)
-</div>)
+    .Apply(m => m.Id, ColumnOption.align_center))
 ```
 
 ![Alt text](http://s16.postimg.org/lviy334g5/screenshot.png "screenshot")
@@ -42,8 +41,10 @@ You're now ready to start using bootstrap-table.
 * Simplify interface and options.
 * Removed PagingUrl -> constructor (TablePaginationOption.###).
 * Upgrade to latest [bootstrap-table](https://github.com/wenzhixin/bootstrap-table).
+
 ### 1.0.1 (22-01-15)
 * Upgrade to latest [bootstrap-table](https://github.com/wenzhixin/bootstrap-table).
+
 ### 1.0.0 (16-01-15)
 * Initial Release.
 
