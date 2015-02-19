@@ -1,118 +1,53 @@
-#bootstrap-table.mvc (ASP.NET / MVC)
+#bootstrap-table.mvc (ASP.NET / MVC) [![nuget package](https://img.shields.io/nuget/v/bootstrap-table.mvc.png?style=flat-square)](https://www.nuget.org/profiles/simonray)
 
-A fluent Html helper for the popular [bootstrap-table](https://github.com/wenzhixin/bootstrap-table) plugin.
+A fluent Html helper for the popular [bootstrap-table](https://github.com/wenzhixin/bootstrap-table) plug-in.
 
-###Nuget
-To install via nuget.
+To install, run the following command in the Package Manager Console.
+
 ```csharp
 Install-Package bootstrap-table.mvc
 ```
-or you can download the [bootstrap-table](https://github.com/wenzhixin/bootstrap-table) plug-in manually.
 
-###Configure
-Add the css and script to your page (layout or bundle)
+## Configuration
+Add the following css
 
-####css
+```css
+<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
 ```
-<link href="~/Content/bootstrap-table.css" rel="stylesheet" />
-```
-####script
-```
-@section scripts
-{
-    <script src="~/Scripts/bootstrap-table/bootstrap-table.js"></script>
-}
+
+and script to your project
+```css
+<script src="~/Scripts/bootstrap-table/bootstrap-table.min.js"></script>
 ```
 >
 
-###Implementation
+## Usage
+You're now ready to start using bootstrap-table.
 
-####Data
-Setup a model and some controller actions to provide access the data.
-
-#####model
 ```csharp
-public class Person
-{
-    public int Id { get; set; }
-    [Display(Name = "First")]
-    public string FirstName { get; set; }
-    [Display(Name = "Last")]
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public bool Active { get; set; }
-    [HiddenInput(DisplayValue = false)]
-    public string HiddenField1 { get; set; }
-    [Display(AutoGenerateField = false)]
-    public string HiddenField2 { get; set; }
-}
+@(Html.BootstrapTable<Person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .Apply(TableOption.striped)
+    .Apply(m => m.Id, ColumnOption.align_center)
+</div>)
 ```
 
-#####controller
-```csharp
-private List<Person> PeopleContext()
-{
-    return new List<Person>
-    {
-        new Person { Id = 1, FirstName = "First1", LastName = "Last1", Email = "1@host.com", Active = true, },
-        new Person { Id = 2, FirstName = "First2", LastName = "Last2", Email = "2@host.com", Active = true, },
-        new Person { Id = 3, FirstName = "First3", LastName = "Last3", Email = "3@host.com", Active = true, },
-        ...
-    };
-}
+![Alt text](http://s16.postimg.org/lviy334g5/screenshot.png "screenshot")
 
-public JsonResult GetPeopleData()
-{
-    return Json(PeopleContext(), JsonRequestBehavior.AllowGet);
-}
+## Examples
+[Download](http://github.com/simonray/bootstrap-table.mvc/zipball/master/)
 
-public JsonResult GetPeoplePaged(int offset, int limit, string search, string sort, string order)
-{
-    var people = PeopleContext();
-    var model = new
-    {
-        total = people.Count(),
-        rows = people.Skip((offset / limit) * limit).Take(limit),
-    };
-    return Json(model, JsonRequestBehavior.AllowGet);
-}
-```
+## Change Log
 
-####View examples
+### 1.1.0 (19-02-15)
+* Simplify interface and options.
+* Removed PagingUrl -> constructor (TablePaginationOption.###).
+* Upgrade to latest [bootstrap-table](https://github.com/wenzhixin/bootstrap-table).
+### 1.0.1 (22-01-15)
+* Upgrade to latest [bootstrap-table](https://github.com/wenzhixin/bootstrap-table).
+### 1.0.0 (16-01-15)
+* Initial Release.
 
-#####simple list
-```csharp
-@(Html.BootstrapTable(Url.Action("GetPeopleData"))
-    .Columns("Id", "FirstName", "LastName", "Email")
-)
-```
+## Acknowledgements
 
-#####columns populated from a view model (supports basic annotations - see model above)
-```csharp
-@Html.BootstrapTable<Person>(Url.Action("GetPeopleData", "Home"))
-```
-
-#####server-side paginated table with custom columns
-```csharp
-@(Html.BootstrapTable()
-    .PagingUrl(Url.Action("GetPeoplePaged"))
-    .Column("Id")
-    .Column("First Name", "FirstName")
-        .ApplyColumn(ColumnOption.align, "right")
-    .Column("Last Name", "LastName")
-        .ApplyColumn(ColumnOption.align, "right")
-)
-```
-
-### #source and #sample project (soon!)
-
-<br/>
-![Alt text](http://s10.postimg.org/bmawadqgp/bt_sample.png "sample")
-
-
-
-###Credits / References
-
-* [bootstrap-table](https://github.com/wenzhixin/bootstrap-table)  
-* [documentation](http://bootstrap-table.wenzhixin.net.cn/)
-
+* [bootstrap-table](https://github.com/wenzhixin/bootstrap-table) / [documentation](http://bootstrap-table.wenzhixin.net.cn/)
+* [startbootstrap.com](http://startbootstrap.com)
