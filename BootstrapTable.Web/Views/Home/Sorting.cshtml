@@ -1,0 +1,18 @@
+﻿
+@Html.TitleTags("Sorting", "basic list", "model columns", "table sort", "column sort")
+
+@Html.Code(
+@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
+    .Apply(TableOption.sortable, TableOption.sortOrder_desc)
+    .Apply(TableOption.sortName, "Id")
+    .Apply(m => m.Id, ColumnOption.sortable)
+)
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .Apply(TableOption.sortable, TableOption.sortOrder_desc)
+    .Apply(TableOption.sortName, "Id")
+    .Apply(m => m.Id, ColumnOption.sortable)
+)

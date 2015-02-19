@@ -1,0 +1,27 @@
+﻿@Html.TitleTags("Links", "basic list", "model columns", "column formatter")
+
+@Html.Code(
+@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
+    .Apply(m => m.FirstName, ColumnOption.formatter, "columnFormatter")
+)
+
+<script>
+    function columnFormatter(value, row, index) {
+        return ("<a href='@@Url.Action("MenuAction", "Home", new { id = "-1" })'>" + value + "</a>")
+            .replace(/-1/g, row["Id"]);
+    }
+</script>
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .Apply(m => m.FirstName, ColumnOption.formatter, "columnFormatter")
+)
+
+<script>
+    function columnFormatter(value, row, index) {
+        return ("<a href='@Url.Action("MenuAction", "Home", new { id = "{0}" })'>" + value + "</a>")
+            .replace(/%7B0%7D/g, row["Id"]);
+    }
+</script>

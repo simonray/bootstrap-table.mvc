@@ -1,0 +1,41 @@
+﻿
+body {
+    font-family: "Raleway", sans-serif;
+}
+
+ul > li.active > a {
+    color: white;
+    background-color: rgba(255,255,255,0.2);
+}
+
+.menu-btn {
+    background: none repeat scroll 0 0 #000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
+    /*position: fixed;*/
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding-top: 2px;
+    padding-left: 2px;
+    border-radius: 4px;
+    z-index: 101;
+    -webkit-transition: background .4s;
+    -o-transition: background .4s;
+    -ms-transition: background .4s;
+    -moz-transition: background .4s;
+    transition: background .4s;
+}
+
+.menu-btn:hover {
+    background: #38C090;
+    color: #FFF;
+}
+
+/*override sidebar*/
+#page-content-wrapper {
+    padding-top: 0px;
+}

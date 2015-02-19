@@ -1,0 +1,31 @@
+﻿
+@Html.TitleTags("Menus", "basic list", "model columns", "column formatter")
+
+@Html.Code(@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
+    .Column().Apply(ColumnOption.formatter, "menuFormatter")
+)
+
+<script>
+    function menuFormatter(value, row, index) {
+        return [
+            '@@Ajax.ActionLink("Ajax", "MenuAction", new { id = "-1", }, new AjaxOptions { }, ...',
+            '@@Html.ActionLink("Html", "MenuAction", new { Id = "-1", }, ...'
+        ].join(' ').replace(/-1/g, row["Id"]);
+    }
+</script>
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .Column().Apply(ColumnOption.formatter, "menuFormatter")    
+)
+
+<script>
+    function menuFormatter(value, row, index) {
+        return [
+            '@Ajax.ActionLink("Ajax", "MenuAction", "Home", new { id = "{0}", }, new AjaxOptions { }, new { @class = "btn btn-primary btn-small" })',
+            '@Html.ActionLink("Html", "MenuAction", "Home", new { id = "{0}", }, new { @class = "btn btn-primary btn-small" })'
+        ].join(' ').replace(/%7B0%7D/g, row["Id"]);
+    }
+</script>

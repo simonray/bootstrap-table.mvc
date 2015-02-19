@@ -1,0 +1,15 @@
+﻿
+@Html.TitleTags("Table Styles", "basic list", "model columns", "custom options")
+
+@Html.Code(@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
+    .Apply(TableOption.showLoading, TableOption.striped)
+    .Cease(TableOption.cache)
+)
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .Apply(TableOption.showLoading, TableOption.striped)
+    .Cease(TableOption.cache)
+)

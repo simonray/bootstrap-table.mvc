@@ -1,0 +1,33 @@
+﻿
+@Html.NuPanel(
+    (string)ViewBag.Package, 
+    @<p>A fluent html helper for the popular <a href="https://github.com/wenzhixin/bootstrap-table">bootstrap-table</a> plug-in.</p>,
+    (string)ViewBag.Repository, GhFont.fa)
+
+<h3>Configure</h3>
+<p>Add the following css</p>
+
+@Html.Code(@<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />)
+
+<p>and script to your project</p>
+@Html.Code(@<script src="~/Scripts/bootstrap-table/bootstrap-table.min.js"></script>)
+
+<h3>Usage</h3>
+<p>You're now ready to start using bootstrap-table...</p>
+
+@Html.Code(
+@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .Apply(TableOption.striped)
+    .Apply(m => m.Id, ColumnOption.align_center)
+</div>)
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .Apply(TableOption.pageSize, 5)
+    .Apply(TableOption.striped)
+    .Apply(m => m.Id, ColumnOption.align_center)
+)
+
+
+
+

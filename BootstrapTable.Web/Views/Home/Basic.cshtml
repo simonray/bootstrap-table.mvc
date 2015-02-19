@@ -1,0 +1,12 @@
+﻿@Html.TitleTags("Simple", "basic list", "manual columns")
+
+@Html.Code(@<div>
+@@(Html.BootstrapTable(Url.Action("GetPeopleData"))
+    .Columns("Id", "FirstName", "LastName", "Email")
+)</div>)
+<br />
+
+@(Html.BootstrapTable(Url.Action("GetPeopleData"))
+    .Columns("Id", "FirstName", "LastName", "Email")
+)
+

@@ -1,0 +1,16 @@
+﻿
+@Html.TitleTags("Paged", "paged list", "model columns", "custom page size")
+
+@Html.Code(
+@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .Apply(TableOption.pageSize, 5)
+)
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .Apply(TableOption.pageSize, 5)
+)
+
+

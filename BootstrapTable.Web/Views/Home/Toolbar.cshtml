@@ -1,0 +1,14 @@
+﻿
+@Html.TitleTags("Toolbar", "basic list", "model columns", "toolbar options")
+
+@Html.Code(
+@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
+    .Apply(TableOption.showRefresh, TableOption.showToggle, TableOption.showColumns)
+)
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .Apply(TableOption.showRefresh, TableOption.showToggle, TableOption.showColumns, TableOption.showPaginationSwitch)
+)

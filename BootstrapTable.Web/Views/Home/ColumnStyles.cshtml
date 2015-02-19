@@ -1,0 +1,18 @@
+﻿
+@Html.TitleTags("Column Styles", "basic list", "model columns", "custom options")
+
+@Html.Code(
+@<div>
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
+    .ApplyToColumns(ColumnOption.halign_center)
+    .Apply(m => m.Id, ColumnOption.align_center)
+    .Cease(m => m.Active, ColumnOption.visible)
+)
+</div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .ApplyToColumns(ColumnOption.halign_center)
+    .Apply(m => m.Id, ColumnOption.align_center)
+    .Cease(m => m.Active, ColumnOption.visible)
+)
