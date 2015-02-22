@@ -58,6 +58,13 @@ namespace BootstrapTable.Support
         }
 
         /// <exclude/>
+        public static string GetName<TModel, TProperty>(this Expression<Func<TModel, TProperty>> field)
+        {
+            var member = field.Body as MemberExpression;
+            return member.Member.Name;
+        }
+
+        /// <exclude/>
         public static string GetDisplayName<TModel, TProperty>(this Expression<Func<TModel, TProperty>> field)
         {
             var member = field.Body as MemberExpression;
@@ -65,7 +72,22 @@ namespace BootstrapTable.Support
             if (display != null && !string.IsNullOrEmpty(display.GetName()))
                 return display.GetName();
             else
-                return member.Member.Name;
+                return member.Member.Name.SplitCamelCase();
+        }
+
+        /// <exclude/>
+        public static IEnumerable<PropertyInfo> GetSortedProperties(this Type type)
+        {
+            int order = int.MaxValue - type.GetProperties().Count();
+            return type.GetProperties()
+                .Select(p => new
+                {
+                    property = p,
+                    order = p.GetCustomAttributes(typeof(DisplayAttribute), true).FirstOrDefault() != null ?
+                        (((DisplayAttribute)p.GetCustomAttributes(typeof(DisplayAttribute), true).First()).GetOrder() ?? ++order) : ++order
+                })
+                .OrderBy(o => o.order)
+                .Select(o => o.property);
         }
     }
 }
