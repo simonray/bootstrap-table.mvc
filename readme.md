@@ -30,12 +30,16 @@ You're now ready to start using bootstrap-table.
     .Apply(m => m.Id, ColumnOption.align_center))
 ```
 
-![Alt text](http://s16.postimg.org/lviy334g5/screenshot.png "screenshot")
+![Alt text](http://s7.postimg.org/eo5ve0ukr/screenshot.png "screenshot")
 
 ## Examples
 [Download](http://github.com/simonray/bootstrap-table.mvc/zipball/master/)
 
 ## Change Log
+
+#### 1.1.1 (22-02-15)
+* Set column title as split camel-case.
+* Support for ordered model properties [Display(Order=#)].
 
 #### 1.1.0 (19-02-15)
 * Simplify interface and options.
