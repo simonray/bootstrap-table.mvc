@@ -16,6 +16,7 @@
 <br />
 
 @(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
+    .Cease(m => m.Location, ColumnOption.visible)
     .Apply(m => m.FirstName, ColumnOption.formatter, "columnFormatter")
 )
 

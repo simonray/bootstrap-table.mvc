@@ -11,16 +11,21 @@ namespace BootstrapTable.Web.Models
     [DebuggerDisplayAttribute("{Id}-{FirstName}")]
     public class Person
     {
-        public int Id { get; set; }
-        [Display(Name = "First")]
+        [Display(Order=1, Name = "First")] //<--- set custom title
         public string FirstName { get; set; }
-        [Display(Name = "Last")]
+        [Display(Order=2, Name = "Last")]
         public string LastName { get; set; }
+        [Display(Order = 0)] //<--- specify order
+        public int Id { get; set; }
         public string Email { get; set; }
-        public bool Active { get; set; }
-        [HiddenInput(DisplayValue = false)]
-        public string HiddenField1 { get; set; }
         [Display(AutoGenerateField = false)]
+        public DateTime BirthDate { get; set; }
+        public string DateOfBirth { get { return BirthDate.ToShortDateString(); } } //<--- title split camel-case
+        public string Location { get; set; }
+
+        [HiddenInput(DisplayValue = false)] //<--- ignore field (method 1)
+        public string HiddenField1 { get; set; }
+        [Display(AutoGenerateField = false)] //<--- ignore field (method 2)
         public string HiddenField2 { get; set; }
     }
 }

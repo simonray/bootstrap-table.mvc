@@ -1,0 +1,18 @@
+﻿@Html.TitleTags("Search", "paged list", "model columns", "search")
+
+@Html.Code(
+    @<div>
+@@(Html.BootstrapTable<person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .Apply(TableOption.pageSize, 5)
+    [... sorting (optional)]
+    </div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleSearch"), TablePaginationOption.server)
+    .Apply(TableOption.showRefresh, TableOption.search)
+    .Apply(TableOption.pageSize, 5)
+    .Apply(TableOption.sortName, "LastName").Apply(TableOption.sortOrder_desc) //<--- set the default initial table sort
+    .Apply(m => m.Id, ColumnOption.sortable)
+    .Apply(m => m.FirstName, ColumnOption.sortable)
+    .Apply(m => m.LastName, ColumnOption.sortable)
+)

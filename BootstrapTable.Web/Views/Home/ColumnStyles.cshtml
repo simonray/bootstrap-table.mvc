@@ -6,7 +6,7 @@
 @@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
     .ApplyToColumns(ColumnOption.halign_center)
     .Apply(m => m.Id, ColumnOption.align_center)
-    .Cease(m => m.Active, ColumnOption.visible)
+    .Cease(m => m.Location, ColumnOption.visible)
 )
 </div>)
 <br />
@@ -14,5 +14,5 @@
 @(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
     .ApplyToColumns(ColumnOption.halign_center)
     .Apply(m => m.Id, ColumnOption.align_center)
-    .Cease(m => m.Active, ColumnOption.visible)
+    .Cease(m => m.Location, ColumnOption.visible)
 )

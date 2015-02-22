@@ -3,16 +3,18 @@
 
 @Html.Code(
 @<div>
-@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData"))
-    .Apply(TableOption.sortable, TableOption.sortOrder_desc)
-    .Apply(TableOption.sortName, "Id")
+@@(Html.BootstrapTable<Person>(Url.Action("GetPeopleData")) 
+    .Apply(TableOption.sortName, "Id").Apply(TableOption.sortOrder_desc)
     .Apply(m => m.Id, ColumnOption.sortable)
+    .Apply(m => m.FirstName, ColumnOption.sortable)
+    .Apply(m => m.LastName, ColumnOption.sortable)
 )
 </div>)
 <br />
 
 @(Html.BootstrapTable<BootstrapTable.Web.Models.Person>(Url.Action("GetPeopleData"))
-    .Apply(TableOption.sortable, TableOption.sortOrder_desc)
-    .Apply(TableOption.sortName, "Id")
+    .Apply(TableOption.sortName, "Id").Apply(TableOption.sortOrder_desc)
     .Apply(m => m.Id, ColumnOption.sortable)
+    .Apply(m => m.FirstName, ColumnOption.sortable)
+    .Apply(m => m.LastName, ColumnOption.sortable)
 )
