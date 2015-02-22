@@ -1,5 +1,6 @@
 ﻿using BootstrapTable.Support;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,7 +18,7 @@ namespace BootstrapTable.Controls
         public TableBuilderT(string id = null, string url = null, TablePaginationOption sidePagination = TablePaginationOption.none, object htmlAttributes = null)
             : base(id, url, sidePagination, htmlAttributes)
         {
-            typeof(TModel).GetProperties().ToDictionary(x => x.Name, x => x).ForEach(pair =>
+            typeof(TModel).GetSortedProperties().ToDictionary(x => x.Name, x => x).ForEach(pair =>
             {
                 DisplayAttribute display = pair.Value.GetCustomAttribute<DisplayAttribute>();
                 HiddenInputAttribute hidden = pair.Value.GetCustomAttribute<HiddenInputAttribute>();
@@ -29,7 +30,7 @@ namespace BootstrapTable.Controls
                         if (display != null && !string.IsNullOrEmpty(display.GetName()))
                             Column(display.GetName(), pair.Key);
                         else
-                            Column(pair.Key);
+                            Column(pair.Key.SplitCamelCase(), pair.Key);
                     }
                 }
             });
@@ -160,7 +161,7 @@ namespace BootstrapTable.Controls
         #endregion //ITableBuilderT
 
         /// <exclude/>
-        protected ITableBuilderT<TModel> ApplyToColumnT<TProperty>(Expression<Func<TModel, TProperty>> expression, string name, object value)
+        protected IColumnBuilderT<TModel> ApplyToColumnT<TProperty>(Expression<Func<TModel, TProperty>> expression, string name, object value)
         {
             if (!SetColumnByTitle(expression.GetDisplayName()))
                 throw new ArgumentException("Column not found!");
