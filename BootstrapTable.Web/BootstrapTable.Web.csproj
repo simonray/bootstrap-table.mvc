@@ -221,6 +221,7 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\MenuAction.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Extensions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

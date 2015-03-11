@@ -47,6 +47,11 @@ namespace System.Web.Mvc
             return MvcHtmlString.Create(lnk.ToString().Replace(repID, rawHtml));
         }
 
+        public static bool Contains(this string input, string find, StringComparison comparisonType)
+        {
+            return String.IsNullOrWhiteSpace(input) ? false : input.IndexOf(find, comparisonType) > -1;
+        }
+
         public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, bool>> expression)
         {
             if (condition)

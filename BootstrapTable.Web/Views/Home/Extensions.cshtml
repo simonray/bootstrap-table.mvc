@@ -1,0 +1,31 @@
+﻿@Html.TitleTags("Extensions", "Exports")
+
+<h4>Exports</h4>
+
+@Html.Code(@<div>
+@@(Html.BootstrapTable<bootstraptable.web.models.person>(Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .ApplyToTable("data-show-export", "true")
+    .Apply(TableOption.buttonsAlign, "left")
+)
+@@section scripts
+{
+    <script src=".../bootstrap-table-export.min.js"></script>
+    <script src=".../tableExport.js"></script>
+    <script src=".../jquery.base64.js"></script>
+}
+    </div>)
+<br />
+
+@(Html.BootstrapTable<BootstrapTable.Web.Models.Person>("tbl", Url.Action("GetPeoplePaged"), TablePaginationOption.server)
+    .ApplyToTable("data-show-export", "true")
+    .Apply(TableOption.buttonsAlign, "left")
+)
+
+
+@section scripts
+{
+    <!-- exports -->
+    <script src="~/Scripts/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+    <script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js"></script>
+}

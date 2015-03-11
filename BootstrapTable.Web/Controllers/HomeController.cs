@@ -19,6 +19,7 @@ namespace BootstrapTable.Web.Controllers
         public ActionResult ColumnStyles() { return View(); }
         public ActionResult Toolbar() { return View(); }
         public ActionResult Search() { return View(); }
+        public ActionResult Extensions() { return View(); }
 
         private List<Person> PeopleSource()
         {
@@ -58,11 +59,11 @@ namespace BootstrapTable.Web.Controllers
         {
             var people = PeopleSource().AsQueryable()
                 .WhereIf(!string.IsNullOrEmpty(search), o =>
-                    o.Email.ToLower().Contains(search.ToLower()) ||
-                    o.FirstName.ToLower().Contains(search.ToLower()) ||
-                    o.LastName.ToLower().Contains(search.ToLower()) ||
-                    o.Location.ToLower().Contains(search.ToLower()))
-                .OrderBy(sort ?? "LastName", order) // <--- null if not no '.SortName(m => m.LastName)' or 'TableOption.SortName'
+                    o.Email.Contains(search, StringComparison.InvariantCultureIgnoreCase) ||
+                    o.FirstName.Contains(search, StringComparison.InvariantCultureIgnoreCase) ||
+                    o.LastName.Contains(search, StringComparison.InvariantCultureIgnoreCase) ||
+                    o.Location.Contains(search, StringComparison.InvariantCultureIgnoreCase))
+                .OrderBy(sort ?? "LastName", order)
                 .ToList();
 
             var model = new
