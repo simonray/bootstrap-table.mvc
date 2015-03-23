@@ -20,6 +20,7 @@ namespace BootstrapTable.Web.Controllers
         public ActionResult Toolbar() { return View(); }
         public ActionResult Search() { return View(); }
         public ActionResult Extensions() { return View(); }
+        public ActionResult Checkboxes() { return View(); }
 
         private List<Person> PeopleSource()
         {
@@ -80,6 +81,14 @@ namespace BootstrapTable.Web.Controllers
                 return JavaScript("alert('MenuAction id = " + id + "')");
             else
                 return View("MenuAction", id);
+        }
+
+        public ActionResult TableAction(int[] ids)
+        {
+            if (ids != null)
+                return Json(new { result = string.Join(", ", ids) });
+            else
+                return Json(new { result = "Nothing selected!" });
         }
     }
 }

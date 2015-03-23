@@ -1,0 +1,44 @@
+﻿@Html.TitleTags("Checkboxes", "paged list", "manual columns", "Checkbox")
+
+@Html.Code(@<div>
+@@(Html.BootstrapTable(Url.Action("GetPeopleData"))
+    .Column("Check").Apply(ColumnOption.checkbox)
+    .Columns("Id", "FirstName", "LastName", "Email")
+)
+</div>)
+<br />
+
+<p>
+@(Html.BootstrapTable("bs-table", Url.Action("GetPeopleData"))
+    .Column("Check").Apply(ColumnOption.checkbox)
+    .Columns("Id", "FirstName", "LastName", "Email")
+)
+</p>
+
+<p>
+    <button id="btnTableAction" class="btn btn-success">Post Selection</button>
+</p>
+
+@section scripts
+{
+    <script>
+        $("#btnTableAction").click(function () {
+            $.ajax({
+                url: '@Url.Action("TableAction", "Home")',
+                data: JSON.stringify( { ids: getSelection() }),
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    alert(response.result);
+                }
+            })
+        });
+
+        function getSelection() {
+            return $.map($('#bs-table').bootstrapTable('getSelections'), function (row) {
+                return row.Id
+            });
+        };
+    </script>
+
+}

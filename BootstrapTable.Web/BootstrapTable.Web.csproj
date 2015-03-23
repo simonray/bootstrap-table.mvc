@@ -222,6 +222,7 @@
     <Content Include="Views\Shared\MenuAction.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Extensions.cshtml" />
+    <Content Include="Views\Home\Checkboxes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
